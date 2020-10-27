@@ -8,10 +8,10 @@ class PicnicBasketSerializer(serializers.ModelSerializer):
         fields = ['id', 'sandwiches', 'bear']
 
 class BearSerializer(serializers.ModelSerializer):
-    picnicbaskets = PicnicBasketSerializer(many=True, read_only=True)
+    # picnicbasketbearserializer = PicnicBasketSerializer(many=True, read_only=True)
     class Meta:
         model = Bear
-        fields = ['id', 'name', 'age', 'picnicbaskets']
+        fields = ['id', 'name', 'age', 'picnicbasketbearserializer']
 
 class FrameworkSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,3 +23,14 @@ class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
         fields = ['id', 'name', 'framework']
+
+class PicnicBasketBearSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bear
+        fields = ['id', 'name', 'age']
+
+class PicnicBasketSerializer(serializers.ModelSerializer):
+    bear = PicnicBasketBearSerializer(many=False)
+    class Meta:
+        model = PicnicBasket
+        fields = ['id', 'sandwiches', 'bear']
